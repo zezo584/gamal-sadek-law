@@ -1,0 +1,322 @@
+{% extends 'base.html.j2' %}
+{% block main %}
+<!-- ============ HERO ============ -->
+<section class="hero" id="home" aria-labelledby="hero-title">
+  <canvas class="hero-dust" aria-hidden="true"></canvas>
+  <img class="hero-watermark" src="{{ root }}assets/img/mark-gold.webp" alt="" aria-hidden="true" width="360" height="330">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow" data-reveal><span class="rule"></span>{{ t.hero.eyebrow }} · {{ t.brand }}</p>
+      <h1 id="hero-title" class="hero-title">
+        <span class="line" data-split>{{ t.hero.h1_a }}</span>
+        <span class="line" data-split>{{ t.hero.h1_b }}</span>
+        <span class="line gold" data-split>{{ t.hero.h1_c }}</span>
+      </h1>
+      <p class="hero-lead" data-reveal style="--d:.5s">{{ t.hero.lead }}</p>
+      <div class="hero-actions" data-reveal style="--d:.65s">
+        <a class="btn btn-gold" href="#contact" data-magnetic><span>{{ t.cta }}</span>{{ icons.arrow | safe }}</a>
+        <a class="btn btn-ghost" href="{{ u.formation }}"><span>{{ t.hero.cta2 }}</span></a>
+      </div>
+    </div>
+    <div class="hero-visual" data-reveal="zoom" style="--d:.3s">
+      <div class="hero-halo" aria-hidden="true">
+        <span class="halo-glow"></span>
+        <svg class="halo-rings" viewBox="0 0 400 400"><circle class="ring-a" cx="200" cy="200" r="198" pathLength="1"/><circle class="ring-b" cx="200" cy="200" r="170"/></svg>
+        <img class="halo-mark" src="{{ root }}assets/img/mark-gold.webp" alt="" width="360" height="330">
+      </div>
+      <img class="hero-person" data-tilt src="{{ root }}assets/img/gamal-cutout.webp" alt="{{ t.about.img_alt }}" width="1000" height="1165" fetchpriority="high">
+      <div class="hero-badge glass">
+        <b class="count" data-count="75">75</b><span>+</span>
+        <small>{{ t.hero.badge_sub }}</small>
+      </div>
+      <div class="hero-sign glass"><img src="{{ root }}assets/img/mark-gold.webp" alt="" width="28" height="26"><span><b>{{ t.about.sign }}</b><small>{{ t.hero.eyebrow }}</small></span></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <ul class="stats" aria-label="{{ t.about.eyebrow }}">
+      {% for n, suf, label in t.stats %}
+      <li data-reveal style="--d:{{ 0.1 * loop.index }}s"><b><span class="count" data-count="{{ n }}">{{ n }}</span>{{ suf }}</b><span>{{ label }}</span></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="sec sec-ivory about" id="about" aria-labelledby="about-title">
+  <div class="wrap about-grid">
+    <figure class="about-photo" data-reveal="left">
+      <img src="{{ root }}assets/img/office-1785.webp" alt="{{ t.about.img_alt }}" width="1600" height="1067" loading="lazy">
+      <figcaption><img src="{{ root }}assets/img/mark-gold.webp" alt="" width="34" height="31"><span>{{ t.about.sign }}</span></figcaption>
+    </figure>
+    <div class="about-copy">
+      <p class="eyebrow" data-reveal><span class="rule"></span>{{ t.about.eyebrow }}</p>
+      <h2 id="about-title" class="h2" data-split>{{ t.about.h2 }}</h2>
+      <p class="lead" data-reveal>{{ t.about.lead }}</p>
+      <p data-reveal>{{ t.about.p2 }}</p>
+      <p data-reveal>{{ t.about.p3 }}</p>
+      <div class="creds">
+        <div class="cred" data-reveal>
+          <h3>{{ icons.diploma | safe }}{{ t.about.dipl_h }}</h3>
+          <ul>{% for d in t.about.dipl %}<li>{{ d }}</li>{% endfor %}</ul>
+        </div>
+        <div class="cred" data-reveal style="--d:.1s">
+          <h3>{{ icons.handshake | safe }}{{ t.about.partner_h }}</h3>
+          <p>{{ t.about.partner }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <ul class="values">
+      {% for h, p in t.about['values'] %}
+      <li data-reveal style="--d:{{ 0.1 * loop.index0 }}s"><h3>{{ h }}</h3><p>{{ p }}</p></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="sec sec-dark services" id="services" aria-labelledby="services-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow" data-reveal><span class="rule"></span>{{ t.services.eyebrow }}</p>
+        <h2 id="services-title" class="h2" data-split>{{ t.services.h2 }}</h2>
+      </div>
+      <p class="lead" data-reveal>{{ t.services.lead }}</p>
+    </div>
+    <div class="svc-grid">
+      {% for key, title, desc, bullets in t.services['items'] %}
+      <article class="svc {{ 'svc-feature' if loop.first }}" data-reveal style="--d:{{ 0.07 * loop.index0 }}s" data-spot>
+        <div class="svc-top">
+          <span class="svc-icon">{{ icons[key] | safe }}</span>
+          {% if loop.first %}<span class="chip">{{ t.services.featured }}</span>{% endif %}
+        </div>
+        <h3>{{ title }}</h3>
+        <p>{{ desc }}</p>
+        {% if bullets %}<ul class="ticks">{% for b in bullets %}<li>{{ b }}</li>{% endfor %}</ul>{% endif %}
+        <div class="svc-actions">
+          <a class="link-arrow" href="#contact" data-service="{{ title }}">{{ t.services.more }}{{ icons.arrow | safe }}</a>
+          {% if loop.first %}<a class="btn btn-gold btn-sm" href="{{ u.formation }}"><span>{{ t.services.formation_link }}</span></a>{% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ============ FORMATION HIGHLIGHT ============ -->
+<section class="sec sec-ivory formation" id="formation" aria-labelledby="formation-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow" data-reveal><span class="rule"></span>{{ t.formation.eyebrow }}</p>
+        <h2 id="formation-title" class="h2" data-split>{{ t.formation.h2 }}</h2>
+      </div>
+      <p class="lead" data-reveal>{{ t.formation.lead }}</p>
+    </div>
+    <h3 class="h3" data-reveal>{{ t.formation.types_h }}</h3>
+    <ul class="types">
+      {% for h, p in t.formation.types %}
+      <li data-reveal style="--d:{{ 0.08 * loop.index0 }}s"><span class="type-col" aria-hidden="true"></span><h4>{{ h }}</h4><p>{{ p }}</p></li>
+      {% endfor %}
+    </ul>
+    <h3 class="h3" data-reveal>{{ t.formation.steps_h }}</h3>
+    <ol class="steps" data-steps>
+      {% for h, p in t.formation.steps %}
+      <li data-reveal style="--d:{{ 0.08 * loop.index0 }}s"><span class="step-n">{{ loop.index }}</span><h4>{{ h }}</h4><p>{{ p }}</p></li>
+      {% endfor %}
+    </ol>
+    <div class="center" data-reveal><a class="btn btn-dark" href="{{ u.formation }}"><span>{{ t.formation.cta }}</span>{{ icons.arrow | safe }}</a></div>
+  </div>
+</section>
+
+<!-- ============ REELS & VIDEO ============ -->
+<section class="sec sec-dark media" id="media" aria-labelledby="media-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow" data-reveal><span class="rule"></span>{{ t.media.eyebrow }}</p>
+        <h2 id="media-title" class="h2" data-split>{{ t.media.h2 }}</h2>
+      </div>
+      <p class="lead" data-reveal>{{ t.media.lead }}</p>
+    </div>
+  </div>
+  <div class="reels" data-reveal>
+    <div class="reels-track" tabindex="0" aria-label="{{ t.media.eyebrow }}"></div>
+    <div class="wrap reels-ui">
+      <div class="reels-follow">
+        <span>{{ t.media.follow }}</span>
+        <div class="socials">{% include 'socials.html.j2' %}</div>
+      </div>
+      <div class="reels-nav">
+        <button type="button" class="round" data-reels="prev" aria-label="{{ t.media.prev }}">{{ icons.chev | safe }}</button>
+        <div class="reels-dots" aria-hidden="true"></div>
+        <button type="button" class="round" data-reels="next" aria-label="{{ t.media.next }}">{{ icons.chev | safe }}</button>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="yt" data-reveal>
+      <div class="yt-player" data-yt>
+        <img src="{{ root }}assets/img/office-1784.webp" alt="{{ t.media.yt_h }}" width="1600" height="1067" loading="lazy">
+        <button type="button" class="yt-play" aria-label="{{ t.media.yt_play }}">
+          <span class="pulse">{{ icons.play | safe }}</span><b>{{ t.media.yt_play }}</b>
+        </button>
+      </div>
+      <div class="yt-copy">
+        <span class="yt-logo">{{ icons.youtube | safe }} YouTube</span>
+        <h3>{{ t.media.yt_h }}</h3>
+        <p>{{ t.media.yt_p }}</p>
+        <a class="btn btn-gold" href="{{ c.SOCIAL.youtube }}?sub_confirmation=1" target="_blank" rel="noopener"><span>{{ t.media.yt_btn }}</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLIENTS ============ -->
+<section class="sec sec-ivory clients" id="clients" aria-labelledby="clients-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow" data-reveal><span class="rule"></span>{{ t.clients.eyebrow }}</p>
+        <h2 id="clients-title" class="h2" data-split>{{ t.clients.h2 }}</h2>
+      </div>
+      <p class="lead" data-reveal>{{ t.clients.lead }}</p>
+    </div>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      {% for _ in range(2) %}{% for short, full, sec in clients %}<span>{{ short }}</span><i>✦</i>{% endfor %}{% endfor %}
+    </div>
+  </div>
+  <div class="wrap">
+    <ul class="client-grid">
+      {% for short, full, sec in clients %}
+      <li data-reveal style="--d:{{ 0.06 * loop.index0 }}s" data-spot>
+        <span class="mono" aria-hidden="true">{{ short[:1] if t.lang == 'en' else short.replace('ال','',1)[:1] }}</span>
+        <h3>{{ full }}</h3>
+        <span class="chip chip-line">{{ sec }}</span>
+      </li>
+      {% endfor %}
+      <li class="client-more" data-reveal>
+        <b>+<span class="count" data-count="75">75</span></b>
+        <span>{{ t.stats[1][2] }}</span>
+      </li>
+    </ul>
+    <div class="partner" data-reveal>
+      <span>{{ t.clients.partner_h }}</span>
+      <b>{{ t.clients.partner }}</b>
+      <ul class="sectors" aria-label="{{ t.clients.sectors_h }}">{% for s in t.clients.sectors %}<li>{{ s }}</li>{% endfor %}</ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACADEMY ============ -->
+<section class="sec sec-dark academy" id="academy" aria-labelledby="academy-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow" data-reveal><span class="rule"></span>{{ t.academy.eyebrow }}</p>
+        <h2 id="academy-title" class="h2" data-split>{{ t.academy.h2 }}</h2>
+      </div>
+      <p class="lead" data-reveal>{{ t.academy.lead }}</p>
+    </div>
+    <div class="courses">
+      {% for title, desc, topics in t.academy.courses %}
+      <article class="course" data-reveal style="--d:{{ 0.12 * loop.index0 }}s" data-spot>
+        <div class="course-head">
+          <span class="course-n">{{ (icons.contracts if loop.index == 2 else icons.formation) | safe }}</span>
+          <div class="chips"><span class="chip">{{ t.academy['for'] }}</span><span class="chip chip-line">{{ t.academy.mode }}</span></div>
+        </div>
+        <h3>{{ title }}</h3>
+        <p>{{ desc }}</p>
+        <h4>{{ t.academy.curriculum }}</h4>
+        <ol class="topics">{% for tp in topics %}<li>{{ tp }}</li>{% endfor %}</ol>
+        <a class="btn btn-gold" href="https://wa.me/{{ c.WHATSAPP }}?text={{ (t.academy.wa ~ title) | urlencode }}" target="_blank" rel="noopener"><span>{{ t.academy.btn }}</span>{{ icons.whatsapp | safe }}</a>
+      </article>
+      {% endfor %}
+    </div>
+    <p class="note" data-reveal>{{ t.academy.note }}</p>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="sec sec-ivory contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap contact-grid">
+    <div class="contact-form-wrap">
+      <p class="eyebrow" data-reveal><span class="rule"></span>{{ t.contact.eyebrow }}</p>
+      <h2 id="contact-title" class="h2" data-split>{{ t.contact.h2 }}</h2>
+      <p class="lead" data-reveal>{{ t.contact.lead }}</p>
+      <form class="consult" id="consult-form" novalidate data-reveal>
+        <div class="field">
+          <label for="f-name">{{ t.contact.f_name }} <em>*</em></label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+          <small class="err" data-err="name"></small>
+        </div>
+        <div class="field">
+          <label for="f-phone">{{ t.contact.f_phone }} <em>*</em></label>
+          <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" required>
+          <small class="err" data-err="phone"></small>
+        </div>
+        <div class="field">
+          <label for="f-email">{{ t.contact.f_email }}</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" dir="ltr">
+        </div>
+        <div class="field">
+          <label for="f-city">{{ t.contact.f_city }}</label>
+          <input id="f-city" name="city" type="text" autocomplete="address-level2">
+        </div>
+        <fieldset class="field full">
+          <legend>{{ t.contact.f_type }}</legend>
+          <div class="seg">
+            {% for o in t.contact.f_type_opts %}
+            <input type="radio" id="f-type-{{ loop.index }}" name="type" value="{{ o }}" {{ 'checked' if loop.first }}><label for="f-type-{{ loop.index }}">{{ o }}</label>
+            {% endfor %}
+          </div>
+        </fieldset>
+        <div class="field">
+          <label for="f-service">{{ t.contact.f_service }} <em>*</em></label>
+          <select id="f-service" name="service" required>
+            <option value="">{{ t.contact.f_service_ph }}</option>
+            {% for s in t.services['items'] %}<option>{{ s[1] }}</option>{% endfor %}
+            {% for co in t.academy.courses %}<option>{{ t.academy.eyebrow }}: {{ co[0] }}</option>{% endfor %}
+          </select>
+          <small class="err" data-err="service"></small>
+        </div>
+        <div class="field">
+          <label for="f-pref">{{ t.contact.f_pref }}</label>
+          <select id="f-pref" name="pref">
+            {% for o in t.contact.f_pref_opts %}<option>{{ o }}</option>{% endfor %}
+          </select>
+        </div>
+        <div class="field full">
+          <label for="f-msg">{{ t.contact.f_msg }} <em>*</em></label>
+          <textarea id="f-msg" name="msg" rows="5" placeholder="{{ t.contact.f_msg_ph }}" required></textarea>
+          <small class="err" data-err="msg"></small>
+        </div>
+        <div class="field full submit-row">
+          <button class="btn btn-wa" type="submit">{{ icons.whatsapp | safe }}<span>{{ t.contact.f_submit }}</span></button>
+          <p class="hint">{{ t.contact.f_note }}</p>
+        </div>
+        <p class="form-ok full" role="status" hidden>{{ t.contact.f_ok }} <a href="#" target="_blank" rel="noopener">{{ t.contact.f_ok_link }}</a></p>
+      </form>
+    </div>
+    <aside class="contact-card" data-reveal="left">
+      <h3>{{ t.contact.info_h }}</h3>
+      <ul class="info">
+        <li>{{ icons.pin | safe }}<div><small>{{ t.contact.address_l }}</small><span>{{ t.contact.address }}</span></div></li>
+        <li>{{ icons.phone | safe }}<div><small>{{ t.contact.phone_l }}</small><a href="tel:{{ c.PHONE_INTL }}" dir="ltr">{{ c.PHONE_LOCAL }}</a><span class="muted" dir="ltr">{{ c.PHONE_INTL }}</span></div>
+          <button type="button" class="copy" data-copy="{{ c.PHONE_INTL }}">{{ t.contact.copy_btn }}</button></li>
+        <li>{{ icons.whatsapp | safe }}<div><small>{{ t.contact.wa_l }}</small><a href="https://wa.me/{{ c.WHATSAPP }}" target="_blank" rel="noopener" dir="ltr">{{ c.PHONE_INTL }}</a></div></li>
+        <li>{{ icons.mail | safe }}<div><small>{{ t.contact.email_l }}</small><a href="mailto:{{ c.EMAIL }}" class="break">{{ c.EMAIL }}</a></div>
+          <button type="button" class="copy" data-copy="{{ c.EMAIL }}">{{ t.contact.copy_btn }}</button></li>
+      </ul>
+      <div class="socials">{% include 'socials.html.j2' %}</div>
+      <div class="map" data-map="{{ map_q }}">
+        <button type="button" class="map-load">{{ icons.pin | safe }}<span>{{ t.contact.map }}</span></button>
+      </div>
+    </aside>
+  </div>
+</section>
+{% endblock %}

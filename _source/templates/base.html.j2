@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="{{ t.lang }}" dir="{{ t.dir }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ meta.title }}</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="{{ meta.desc }}">
+{% if meta.keywords %}<meta name="keywords" content="{{ meta.keywords }}">{% endif %}
+<meta name="author" content="{{ t.brand_full }}">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#111111">
+<link rel="canonical" href="{{ meta.canonical }}">
+<link rel="alternate" hreflang="ar" href="{{ meta.alt_ar }}">
+<link rel="alternate" hreflang="en" href="{{ meta.alt_en }}">
+<link rel="alternate" hreflang="x-default" href="{{ meta.alt_ar }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ t.brand_full }}">
+<meta property="og:title" content="{{ meta.title }}">
+<meta property="og:description" content="{{ meta.desc }}">
+<meta property="og:url" content="{{ meta.canonical }}">
+<meta property="og:image" content="{{ domain }}/assets/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="{{ t.locale }}">
+<meta property="og:locale:alternate" content="{{ 'en_US' if t.lang == 'ar' else 'ar_EG' }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ meta.title }}">
+<meta name="twitter:description" content="{{ meta.desc }}">
+<meta name="twitter:image" content="{{ domain }}/assets/img/og-image.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ root }}assets/img/icon-32.png">
+<link rel="apple-touch-icon" href="{{ root }}assets/img/icon-180.png">
+<link rel="manifest" href="{{ root }}site.webmanifest">
+<script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__siteReady){document.documentElement.classList.remove("js")}},3500)</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="{{ root }}assets/css/style.css">
+<script type="application/ld+json">{{ schema | safe }}</script>
+</head>
+<body class="page-{{ page }}">
+<a class="skip" href="#main">{{ t.skip }}</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<div class="loader" aria-hidden="true">
+  <img src="{{ root }}assets/img/mark-gold.webp" alt="" width="120" height="110">
+  <span class="loader-line"><i></i></span>
+</div>
+
+<header class="site-header" id="top">
+  <div class="wrap header-in">
+    <a class="brand" href="{{ u.home }}" aria-label="{{ t.brand_full }}">
+      <img src="{{ root }}assets/img/mark-gold.webp" alt="" width="44" height="40">
+      <span class="brand-text"><b>{{ t.brand }}</b><small>{{ t.tagline }}</small></span>
+    </a>
+    <nav class="nav" aria-label="{{ t.menu }}">
+      <ul>
+        {% for id, label in t.nav %}
+        <li><a href="{{ u.home_anchor }}#{{ id }}" data-nav="{{ id }}">{{ label }}</a></li>
+        {% if id == 'services' %}<li><a href="{{ u.formation }}" class="{{ 'is-current' if page == 'formation' }}">{{ t.nav_formation }}</a></li>{% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="lang" href="{{ u.other }}" hreflang="{{ t.other }}" lang="{{ t.other }}" title="{{ t.other_label }}">{{ t.other_short }}</a>
+      <a class="btn btn-gold btn-sm header-cta" href="{{ u.home_anchor }}#contact" data-magnetic><span>{{ t.cta }}</span></a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="{{ t.menu }}"><i></i><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <nav aria-label="{{ t.menu }}">
+    {% for id, label in t.nav %}
+    <a href="{{ u.home_anchor }}#{{ id }}" style="--i:{{ loop.index }}">{{ label }}</a>
+    {% if id == 'services' %}<a href="{{ u.formation }}" style="--i:{{ loop.index }}">{{ t.nav_formation }}</a>{% endif %}
+    {% endfor %}
+    {% for id, label in t.nav_extra %}<a class="sub" href="{{ u.home_anchor }}#{{ id }}">{{ label }}</a>{% endfor %}
+  </nav>
+  <a class="btn btn-gold" href="{{ u.home_anchor }}#contact">{{ t.cta }}</a>
+  <a class="drawer-lang" href="{{ u.other }}" lang="{{ t.other }}">{{ t.other_label }}</a>
+</div>
+
+<main id="main">
+{% block main %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="f-brand">
+      <img src="{{ root }}assets/img/wordmark.webp" alt="{{ t.brand_full }}" width="260" height="95" loading="lazy">
+      <p class="f-tag">{{ t.tagline }}</p>
+      <p>{{ t.footer.about }}</p>
+    </div>
+    <div>
+      <h3>{{ t.footer.links }}</h3>
+      <ul>
+        {% for id, label in t.nav %}<li><a href="{{ u.home_anchor }}#{{ id }}">{{ label }}</a></li>{% endfor %}
+        {% for id, label in t.nav_extra %}<li><a href="{{ u.home_anchor }}#{{ id }}">{{ label }}</a></li>{% endfor %}
+      </ul>
+    </div>
+    <div>
+      <h3>{{ t.footer.services }}</h3>
+      <ul>
+        {% for s in t.services['items'] %}<li><a href="{{ u.formation if s[0] == 'formation' else u.home_anchor ~ '#services' }}">{{ s[1] }}</a></li>{% endfor %}
+      </ul>
+    </div>
+    <div>
+      <h3>{{ t.contact.info_h }}</h3>
+      <ul class="f-contact">
+        <li>{{ t.contact.address }}</li>
+        <li><a href="tel:{{ c.PHONE_INTL }}" dir="ltr">{{ c.PHONE_LOCAL }}</a></li>
+        <li><a href="mailto:{{ c.EMAIL }}">{{ c.EMAIL }}</a></li>
+      </ul>
+      <div class="socials">{% include 'socials.html.j2' %}</div>
+    </div>
+  </div>
+  <div class="wrap f-bottom">
+    <span>© <span data-year>2026</span> {{ t.brand_full }} — {{ t.footer.rights }}</span>
+    <a href="#top" class="to-top">{{ t.top }} ↑</a>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/{{ c.WHATSAPP }}" target="_blank" rel="noopener" aria-label="{{ t.wa_float }}">
+  {{ icons.whatsapp | safe }}<span>{{ t.wa_float }}</span>
+</a>
+<a class="mobile-cta" href="{{ u.home_anchor }}#contact">{{ t.cta }}</a>
+
+<script>window.I18N = {{ i18n | safe }};</script>
+<script src="{{ root }}assets/js/config.js"></script>
+<script src="{{ root }}assets/js/main.js" defer></script>
+</body>
+</html>

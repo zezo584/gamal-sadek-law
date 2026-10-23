@@ -1,0 +1,22 @@
+{
+ "name": "مكتب المستشار جمال عبدالناصر صادق",
+ "short_name": "جمال صادق",
+ "lang": "ar",
+ "dir": "rtl",
+ "start_url": "/",
+ "display": "standalone",
+ "background_color": "#111111",
+ "theme_color": "#111111",
+ "icons": [
+  {
+   "src": "assets/img/icon-180.png",
+   "sizes": "180x180",
+   "type": "image/png"
+  },
+  {
+   "src": "assets/img/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  }
+ ]
+}

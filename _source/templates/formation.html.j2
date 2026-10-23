@@ -1,0 +1,107 @@
+{% extends 'base.html.j2' %}
+{% block main %}
+<section class="hero hero-sub" aria-labelledby="fp-title">
+  <canvas class="hero-dust" aria-hidden="true"></canvas>
+  <img class="hero-watermark" src="{{ root }}assets/img/mark-gold.webp" alt="" aria-hidden="true" width="360" height="330">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="breadcrumb">
+      <a href="{{ u.home }}">{{ t.nav[0][1] }}</a><span aria-hidden="true">/</span><span aria-current="page">{{ t.fp.crumb }}</span>
+    </nav>
+    <div class="hero-grid sub-grid">
+      <div class="hero-copy">
+        <p class="eyebrow" data-reveal><span class="rule"></span>{{ t.fp.eyebrow }}</p>
+        <h1 id="fp-title" class="hero-title">
+          <span class="line" data-split>{{ t.fp.h1 }}</span>
+          <span class="line gold small" data-split>{{ t.fp.h1_b }}</span>
+        </h1>
+        <p class="hero-lead" data-reveal style="--d:.4s">{{ t.fp.lead }}</p>
+        <div class="hero-actions" data-reveal style="--d:.55s">
+          <a class="btn btn-gold" href="#fp-contact" data-magnetic><span>{{ t.cta }}</span>{{ icons.arrow | safe }}</a>
+          <a class="btn btn-ghost" href="https://wa.me/{{ c.WHATSAPP }}?text={{ (t.fp.h1 ~ ' — ' ~ t.cta) | urlencode }}" target="_blank" rel="noopener">{{ icons.whatsapp | safe }}<span>{{ t.contact.wa_l }}</span></a>
+        </div>
+      </div>
+      <ul class="sub-stats" data-reveal="zoom">
+        {% for n, suf, label in t.stats %}<li><b><span class="count" data-count="{{ n }}">{{ n }}</span>{{ suf }}</b><span>{{ label }}</span></li>{% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-ivory" aria-labelledby="why-title">
+  <div class="wrap">
+    <h2 id="why-title" class="h2" data-split>{{ t.fp.why_h }}</h2>
+    <ul class="why">
+      {% for h, p in t.fp.why %}
+      <li data-reveal style="--d:{{ 0.08 * loop.index0 }}s"><span class="svc-icon">{{ icons[['formation','contracts','civil','affairs'][loop.index0]] | safe }}</span><h3>{{ h }}</h3><p>{{ p }}</p></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="sec sec-dark" aria-labelledby="types-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow" data-reveal><span class="rule"></span>{{ t.formation.eyebrow }}</p>
+        <h2 id="types-title" class="h2" data-split>{{ t.formation.types_h }}</h2>
+      </div>
+      <p class="lead" data-reveal>{{ t.formation.lead }}</p>
+    </div>
+    <ul class="types types-dark">
+      {% for h, p in t.formation.types %}
+      <li data-reveal style="--d:{{ 0.08 * loop.index0 }}s" data-spot><span class="type-col" aria-hidden="true"></span><h3>{{ h }}</h3><p>{{ p }}</p></li>
+      {% endfor %}
+    </ul>
+    <h2 class="h3 on-dark" data-reveal>{{ t.formation.steps_h }}</h2>
+    <ol class="steps steps-dark" data-steps>
+      {% for h, p in t.formation.steps %}
+      <li data-reveal style="--d:{{ 0.08 * loop.index0 }}s"><span class="step-n">{{ loop.index }}</span><h3>{{ h }}</h3><p>{{ p }}</p></li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="sec sec-ivory" aria-labelledby="docs-title">
+  <div class="wrap docs-grid">
+    <div class="docs">
+      <h2 id="docs-title" class="h2" data-split>{{ t.fp.docs_h }}</h2>
+      <ul class="checklist">{% for d in t.fp.docs %}<li data-reveal style="--d:{{ 0.06 * loop.index0 }}s">{{ d }}</li>{% endfor %}</ul>
+      <p class="note dark" data-reveal>{{ t.fp.docs_note }}</p>
+    </div>
+    <div class="docs-side" data-reveal="left">
+      <img src="{{ root }}assets/img/office-1786.webp" alt="{{ t.about.img_alt }}" width="1600" height="1067" loading="lazy">
+      <div class="docs-sectors">
+        <h3>{{ t.fp.sectors_h }}</h3>
+        <ul class="sectors">{% for s in t.clients.sectors %}<li>{{ s }}</li>{% endfor %}</ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-dark faq-sec" aria-labelledby="faq-title">
+  <div class="wrap faq-wrap">
+    <h2 id="faq-title" class="h2" data-split>{{ t.fp.faq_h }}</h2>
+    <div class="faq">
+      {% for q, a in t.fp.faq %}
+      <details data-reveal style="--d:{{ 0.05 * loop.index0 }}s" {{ 'open' if loop.first }}>
+        <summary><h3>{{ q }}</h3><span class="plus" aria-hidden="true"></span></summary>
+        <div class="ans"><p>{{ a }}</p></div>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-ivory cta-band" id="fp-contact" aria-labelledby="cta-title">
+  <div class="wrap cta-in" data-reveal>
+    <img src="{{ root }}assets/img/mark-gold.webp" alt="" width="90" height="82" aria-hidden="true">
+    <h2 id="cta-title" class="h2">{{ t.fp.cta_h }}</h2>
+    <p class="lead">{{ t.fp.cta_p }}</p>
+    <div class="hero-actions center">
+      <a class="btn btn-dark" href="{{ u.home_anchor }}#contact"><span>{{ t.cta }}</span>{{ icons.arrow | safe }}</a>
+      <a class="btn btn-wa" href="https://wa.me/{{ c.WHATSAPP }}?text={{ (t.fp.h1 ~ ' — ' ~ t.cta) | urlencode }}" target="_blank" rel="noopener">{{ icons.whatsapp | safe }}<span>{{ t.contact.wa_l }}</span></a>
+    </div>
+    <a class="link-arrow back" href="{{ u.home }}">{{ t.fp.back }}</a>
+  </div>
+</section>
+{% endblock %}
