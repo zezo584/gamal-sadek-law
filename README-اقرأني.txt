@@ -22,7 +22,7 @@
 2) رقم واتساب الذي تصل عليه طلبات الاستشارة: assets/js/config.js  ← whatsapp
 
 3) النطاق (الدومين) — مهم للسيو قبل الرفع:
-   النطاق الحالي مؤقت: https://www.gamalsadeklaw.com
+   النطاق الحالي: https://zezo584.github.io/gamal-sadek-law (GitHub Pages)
    استبدله بالنطاق الحقيقي في كل الملفات (بحث واستبدال) — أو عدّل DOMAIN في _source/build.py ثم شغّل:  python build.py
    الملفات المتأثرة: كل صفحات html + sitemap.xml + robots.txt
 

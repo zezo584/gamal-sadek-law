@@ -6,7 +6,7 @@ import json, os, re, shutil
 from jinja2 import Environment, FileSystemLoader
 import content as C
 
-DOMAIN = "https://www.gamalsadeklaw.com"   # <-- غيّر هذا إلى نطاق الموقع الحقيقي
+DOMAIN = "https://zezo584.github.io/gamal-sadek-law"   # change when a custom domain is linked
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..")
 MAP_Q = "27 شارع المعتمدية الرئيسي، المعتمدية، الجيزة، مصر"
@@ -137,7 +137,7 @@ def build():
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + "\n".join(urls) + "\n</urlset>\n")
     open(os.path.join(OUT, "robots.txt"), "w", encoding="utf-8").write(f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\n")
     json.dump({"name": C.AR["brand_full"], "short_name": "جمال صادق", "lang": "ar", "dir": "rtl",
-               "start_url": "/", "display": "standalone", "background_color": "#111111", "theme_color": "#111111",
+               "start_url": "./", "display": "standalone", "background_color": "#111111", "theme_color": "#111111",
                "icons": [{"src": "assets/img/icon-180.png", "sizes": "180x180", "type": "image/png"},
                          {"src": "assets/img/icon-512.png", "sizes": "512x512", "type": "image/png"}]},
               open(os.path.join(OUT, "site.webmanifest"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)

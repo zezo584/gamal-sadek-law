@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.gamalsadeklaw.com/sitemap.xml
+Sitemap: https://zezo584.github.io/gamal-sadek-law/sitemap.xml
