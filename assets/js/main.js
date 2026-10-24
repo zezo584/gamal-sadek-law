@@ -314,9 +314,24 @@
     setTimeout(function () { updateCenter(); }, 60);
   }
 
+  /* ---------- featured videos (embedded directly) ---------- */
+  var fg = $("[data-featured]");
+  if (fg) {
+    var vids = (CFG.featuredVideos || []).filter(function (v) { return v && v.url; }).map(function (v) {
+      var m = v.url.match(/(?:shorts\/|youtu\.be\/|[?&]v=|embed\/)([\w-]{11})/);
+      return m ? { id: m[1], tall: /shorts\//.test(v.url), title: v.title || "" } : null;
+    }).filter(Boolean);
+    if (vids.length) {
+      fg.innerHTML = vids.map(function (v) {
+        return '<div class="vid"><div class="frame' + (v.tall ? " tall" : "") + '"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/' + v.id + '?rel=0" title="' + v.title.replace(/"/g, "&quot;") + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>' + (v.title ? "<h3>" + v.title + "</h3>" : "") + "</div>";
+      }).join("");
+      fg.hidden = false;
+    }
+  }
+
   /* ---------- big YouTube player ---------- */
   var yt = $("[data-yt]");
-  if (yt && CID) {
+  if (yt && CID && $(".yt-play", yt)) {
     $(".yt-play", yt).addEventListener("click", function () {
       var host = doc.createElement("div"); host.className = "yt-host"; yt.appendChild(host);
       $(".yt-play", yt).hidden = true;
@@ -388,7 +403,7 @@
       lines.push("⚖️ " + L.service + ": " + v("service"));
       lines.push("💬 " + L.pref + ": " + v("pref"));
       lines.push("", "📝 " + L.msg + ":", v("msg"));
-      var url = "https://wa.me/" + (CFG.whatsapp || "201117170122") + "?text=" + encodeURIComponent(lines.join("\n"));
+      var url = "https://wa.me/" + (CFG.whatsapp || "201023973054") + "?text=" + encodeURIComponent(lines.join("\n"));
       var okBox = $(".form-ok", form);
       if (okBox) { okBox.hidden = false; $("a", okBox).href = url; }
       var w = window.open(url, "_blank", "noopener");

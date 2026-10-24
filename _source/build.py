@@ -5,6 +5,7 @@ Change DOMAIN below to the real domain before publishing."""
 import json, os, re, shutil
 from jinja2 import Environment, FileSystemLoader
 import content as C
+import content_extra as X
 
 DOMAIN = "https://zezo584.github.io/gamal-sadek-law"   # change when a custom domain is linked
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -43,13 +44,21 @@ PAGES = {  # (lang, page) -> path relative to site root
     ("ar", "formation"): "company-formation/index.html",
     ("en", "formation"): "en/company-formation/index.html",
 }
+TYPE_SLUGS = [ty["slug"] for ty in X.TYPES["ar"]]
+for _slug in TYPE_SLUGS:
+    PAGES[("ar", "type:" + _slug)] = f"company-formation/{_slug}/index.html"
+    PAGES[("en", "type:" + _slug)] = f"en/company-formation/{_slug}/index.html"
+YT_CID = "_6UPyYqWoA6_RgK2Z3ujvQ"
 CLEAN = {k: "/" + v.replace("index.html", "") for k, v in PAGES.items()}
 
 def rel(from_path, to_path):
     depth = from_path.count("/")
     return "../" * depth + to_path
 
-def schema_for(lang, page, t):
+def faq_schema(items):
+    return {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in items]}
+
+def schema_for(lang, page, t, ty=None):
     url = DOMAIN + CLEAN[(lang, page)]
     org_id = DOMAIN + "/#organization"
     person = {
@@ -68,7 +77,7 @@ def schema_for(lang, page, t):
         "name": t["brand_full"], "alternateName": [C.AR["brand_full"], C.EN["brand_full"]],
         "description": t["home"]["desc"], "url": DOMAIN + "/",
         "logo": DOMAIN + "/assets/img/icon-512.png", "image": DOMAIN + "/assets/img/og-image.jpg",
-        "telephone": C.PHONE_INTL, "email": C.EMAIL,
+        "telephone": [C.PHONE_INTL, C.PHONE2_INTL], "email": C.EMAIL,
         "address": {"@type": "PostalAddress", "streetAddress": t["contact"]["address"], "addressCountry": "EG"},
         "areaServed": {"@type": "Country", "name": "Egypt"},
         "founder": {"@id": DOMAIN + "/#gamal"}, "employee": {"@id": DOMAIN + "/#gamal"},
@@ -84,10 +93,19 @@ def schema_for(lang, page, t):
         for co in t["academy"]["courses"]:
             graph.append({"@type": "Course", "name": co[0], "description": co[1], "inLanguage": lang,
                           "provider": {"@id": org_id}, "teaches": co[2]})
+        graph.append(faq_schema(X.HOME_FAQ[lang]["items"]))
+    elif ty:
+        graph.append({"@type": "Service", "name": ty["name"], "serviceType": "Company formation",
+                      "description": ty["desc"], "provider": {"@id": org_id}, "areaServed": "EG", "url": url})
+        graph.append(faq_schema(ty["faq"]))
+        graph.append({"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": t["nav"][0][1], "item": DOMAIN + CLEAN[(lang, "home")]},
+            {"@type": "ListItem", "position": 2, "name": t["fp"]["crumb"], "item": DOMAIN + CLEAN[(lang, "formation")]},
+            {"@type": "ListItem", "position": 3, "name": ty["name"], "item": url}]})
     else:
         graph.append({"@type": "Service", "name": t["fp"]["h1"], "serviceType": "Company formation",
                       "description": t["fp"]["desc"], "provider": {"@id": org_id}, "areaServed": "EG", "url": url})
-        graph.append({"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in t["fp"]["faq"]]})
+        graph.append(faq_schema(t["fp"]["faq"]))
         graph.append({"@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": t["nav"][0][1], "item": DOMAIN + CLEAN[(lang, "home")]},
             {"@type": "ListItem", "position": 2, "name": t["fp"]["crumb"], "item": url}]})
@@ -99,15 +117,27 @@ def build():
     for (lang, page), path in PAGES.items():
         t = C.LANGS[lang]
         other = "en" if lang == "ar" else "ar"
+        ty = None; others = []
+        if page.startswith("type:"):
+            slug = page[5:]
+            ty = next(x for x in X.TYPES[lang] if x["slug"] == slug)
+            others = [{"name": x["name"], "short": x["short"], "url": rel(path, PAGES[(lang, "type:" + x["slug"])])}
+                      for x in X.TYPES[lang] if x["slug"] != slug]
         u = {
             "home": rel(path, PAGES[(lang, "home")]),
             "formation": rel(path, PAGES[(lang, "formation")]),
             "other": rel(path, PAGES[(other, page)]),
             "home_anchor": "" if page == "home" else rel(path, PAGES[(lang, "home")]),
+            "types": [rel(path, PAGES[(lang, "type:" + sl)]) for sl in TYPE_SLUGS],
         }
+        if page == "home":
+            title, desc = t["home"]["title"], t["home"]["desc"]
+        elif ty:
+            title, desc = ty["title"], ty["desc"]
+        else:
+            title, desc = t["fp"]["title"], t["fp"]["desc"]
         meta = {
-            "title": t["home"]["title"] if page == "home" else t["fp"]["title"],
-            "desc": t["home"]["desc"] if page == "home" else t["fp"]["desc"],
+            "title": title, "desc": desc,
             "keywords": t["home"]["keywords"],
             "canonical": DOMAIN + CLEAN[(lang, page)],
             "alt_ar": DOMAIN + CLEAN[("ar", page)], "alt_en": DOMAIN + CLEAN[("en", page)],
@@ -116,10 +146,11 @@ def build():
             "lang": lang, "dir": t["dir"],
             "media": t["media"], "contact": {k: v for k, v in t["contact"].items() if k.startswith(("f_", "wa_", "copied"))},
         }
-        tpl = env.get_template(page + ".html.j2")
-        html = tpl.render(t=t, c=C, u=u, meta=meta, root="../" * path.count("/"), page=page,
+        tpl = env.get_template(("type" if ty else page) + ".html.j2")
+        html = tpl.render(t=t, c=C, u=u, meta=meta, root="../" * path.count("/"), page=("type" if ty else page),
                           icons=ICONS, clients=C.CLIENTS[lang], domain=DOMAIN, map_q=MAP_Q,
-                          schema=schema_for(lang, page, t),
+                          hfaq=X.HOME_FAQ[lang], tui=X.TYPE_UI[lang], ty=ty, others=others, yt_cid=YT_CID,
+                          schema=schema_for(lang, page, t, ty),
                           i18n=json.dumps(i18n, ensure_ascii=False).replace("</", "<\\/"))
         html = re.sub(r"\n\s*\n+", "\n", html)
         dest = os.path.join(OUT, path)
@@ -129,10 +160,10 @@ def build():
 
     # sitemap / robots / manifest
     urls = []
-    for page in ("home", "formation"):
+    for page in ["home", "formation"] + ["type:" + sl for sl in TYPE_SLUGS]:
         for lang in ("ar", "en"):
             alts = "".join(f'\n    <xhtml:link rel="alternate" hreflang="{l}" href="{DOMAIN}{CLEAN[(l, page)]}"/>' for l in ("ar", "en"))
-            urls.append(f'  <url>\n    <loc>{DOMAIN}{CLEAN[(lang, page)]}</loc>{alts}\n    <changefreq>monthly</changefreq>\n    <priority>{"1.0" if page == "home" and lang == "ar" else "0.9"}</priority>\n  </url>')
+            urls.append(f'  <url>\n    <loc>{DOMAIN}{CLEAN[(lang, page)]}</loc>{alts}\n    <changefreq>monthly</changefreq>\n    <priority>{"1.0" if page == "home" and lang == "ar" else ("0.9" if not page.startswith("type:") else "0.8")}</priority>\n  </url>')
     open(os.path.join(OUT, "sitemap.xml"), "w", encoding="utf-8").write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + "\n".join(urls) + "\n</urlset>\n")
     open(os.path.join(OUT, "robots.txt"), "w", encoding="utf-8").write(f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\n")

@@ -5,6 +5,7 @@
   index.html                          الرئيسية (عربي)
   en/index.html                       الرئيسية (English)
   company-formation/index.html        صفحة تأسيس الشركات (عربي) — صفحة مخصصة للسيو
+  company-formation/<نوع>/index.html  صفحة لكل شكل شركة: single-person-company / limited-liability-company / joint-stock-company / partnerships
   en/company-formation/index.html     Company Formation (English)
 
 للمعاينة: افتح index.html بالمتصفح مباشرة (الخطوط والفيديو والخريطة تحتاج اتصال إنترنت).
@@ -19,10 +20,12 @@
      ],
    لو القائمة فاضية، الموقع يعرض تلقائيًا أحدث الشورتس من قناة اليوتيوب.
 
+1-ب) أقوى الفيديوهات المدمجة: في نفس الملف assets/js/config.js ضع روابط اليوتيوب داخل featuredVideos.
+
 2) رقم واتساب الذي تصل عليه طلبات الاستشارة: assets/js/config.js  ← whatsapp
 
 3) النطاق (الدومين) — مهم للسيو قبل الرفع:
-   النطاق الحالي: https://zezo584.github.io/gamal-sadek-law (GitHub Pages)
+   النطاق الحالي مؤقت: https://www.gamalsadeklaw.com
    استبدله بالنطاق الحقيقي في كل الملفات (بحث واستبدال) — أو عدّل DOMAIN في _source/build.py ثم شغّل:  python build.py
    الملفات المتأثرة: كل صفحات html + sitemap.xml + robots.txt
 

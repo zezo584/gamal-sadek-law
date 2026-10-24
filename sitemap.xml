@@ -28,4 +28,60 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <url>
+    <loc>https://zezo584.github.io/gamal-sadek-law/company-formation/single-person-company/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://zezo584.github.io/gamal-sadek-law/company-formation/single-person-company/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zezo584.github.io/gamal-sadek-law/en/company-formation/single-person-company/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zezo584.github.io/gamal-sadek-law/en/company-formation/single-person-company/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://zezo584.github.io/gamal-sadek-law/company-formation/single-person-company/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zezo584.github.io/gamal-sadek-law/en/company-formation/single-person-company/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zezo584.github.io/gamal-sadek-law/company-formation/limited-liability-company/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://zezo584.github.io/gamal-sadek-law/company-formation/limited-liability-company/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zezo584.github.io/gamal-sadek-law/en/company-formation/limited-liability-company/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zezo584.github.io/gamal-sadek-law/en/company-formation/limited-liability-company/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://zezo584.github.io/gamal-sadek-law/company-formation/limited-liability-company/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zezo584.github.io/gamal-sadek-law/en/company-formation/limited-liability-company/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zezo584.github.io/gamal-sadek-law/company-formation/joint-stock-company/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://zezo584.github.io/gamal-sadek-law/company-formation/joint-stock-company/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zezo584.github.io/gamal-sadek-law/en/company-formation/joint-stock-company/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zezo584.github.io/gamal-sadek-law/en/company-formation/joint-stock-company/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://zezo584.github.io/gamal-sadek-law/company-formation/joint-stock-company/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zezo584.github.io/gamal-sadek-law/en/company-formation/joint-stock-company/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zezo584.github.io/gamal-sadek-law/company-formation/partnerships/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://zezo584.github.io/gamal-sadek-law/company-formation/partnerships/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zezo584.github.io/gamal-sadek-law/en/company-formation/partnerships/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zezo584.github.io/gamal-sadek-law/en/company-formation/partnerships/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://zezo584.github.io/gamal-sadek-law/company-formation/partnerships/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zezo584.github.io/gamal-sadek-law/en/company-formation/partnerships/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

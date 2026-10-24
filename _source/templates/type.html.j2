@@ -1,0 +1,98 @@
+{% extends 'base.html.j2' %}
+{% block main %}
+<section class="hero hero-sub" aria-labelledby="ty-title">
+  <canvas class="hero-dust" aria-hidden="true"></canvas>
+  <img class="hero-watermark" src="{{ root }}assets/img/mark-gold.webp" alt="" aria-hidden="true" width="360" height="330">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="breadcrumb">
+      <a href="{{ u.home }}">{{ t.nav[0][1] }}</a><span aria-hidden="true">/</span>
+      <a href="{{ u.formation }}">{{ t.fp.crumb }}</a><span aria-hidden="true">/</span>
+      <span aria-current="page">{{ ty.name }}</span>
+    </nav>
+    <div class="hero-grid sub-grid">
+      <div class="hero-copy">
+        <p class="eyebrow" data-reveal><span class="rule"></span>{{ t.fp.crumb }} · {{ ty.short }}</p>
+        <h1 id="ty-title" class="hero-title"><span class="line" data-split>{{ ty.name }}</span></h1>
+        <p class="hero-lead" data-reveal style="--d:.35s">{{ ty.intro }}</p>
+        <div class="hero-actions" data-reveal style="--d:.5s">
+          <a class="btn btn-gold" href="{{ u.home_anchor }}#contact" data-magnetic><span>{{ t.cta }}</span>{{ icons.arrow | safe }}</a>
+          <a class="btn btn-ghost" href="https://wa.me/{{ c.WHATSAPP }}?text={{ (tui.start ~ ' ' ~ ty.name) | urlencode }}" target="_blank" rel="noopener">{{ icons.whatsapp | safe }}<span>{{ t.contact.wa_l }}</span></a>
+        </div>
+      </div>
+      <div class="facts glass" data-reveal="zoom">
+        <h2>{{ tui.facts }}</h2>
+        <dl>
+          {% for k, v in ty.facts %}<div><dt>{{ k }}</dt><dd>{{ v }}</dd></div>{% endfor %}
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-ivory" aria-label="{{ ty.name }}">
+  <div class="wrap ty-cols">
+    <div class="ty-box" data-reveal>
+      <h2 class="h3">{{ tui.suits }}</h2>
+      <ul class="checklist">{% for x in ty.suits %}<li>{{ x }}</li>{% endfor %}</ul>
+    </div>
+    <div class="ty-box" data-reveal style="--d:.1s">
+      <h2 class="h3">{{ tui.pros }}</h2>
+      <ul class="ticks ticks-light">{% for x in ty.pros %}<li>{{ x }}</li>{% endfor %}</ul>
+      <h2 class="h3">{{ tui.cons }}</h2>
+      <ul class="ticks ticks-light warn">{% for x in ty.cons %}<li>{{ x }}</li>{% endfor %}</ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-dark" aria-labelledby="ty-steps">
+  <div class="wrap">
+    <h2 id="ty-steps" class="h2" data-split>{{ tui.steps }}</h2>
+    <ol class="steps steps-dark" data-steps style="margin-top:48px">
+      {% for h, p in t.formation.steps %}
+      <li data-reveal style="--d:{{ 0.08 * loop.index0 }}s"><span class="step-n">{{ loop.index }}</span><h3>{{ h }}</h3><p>{{ p }}</p></li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="sec sec-ivory2" aria-labelledby="ty-faq">
+  <div class="wrap faq-wrap">
+    <div class="faq-side">
+      <h2 id="ty-faq" class="h2" data-split>{{ tui.faq }} {{ ty.name }}</h2>
+      <p class="note dark" data-reveal>{{ t.fp.docs_note }}</p>
+    </div>
+    <div class="faq faq-light">
+      {% for q, a in ty.faq %}
+      <details data-reveal style="--d:{{ 0.05 * loop.index0 }}s" {{ 'open' if loop.first }}>
+        <summary><h3>{{ q }}</h3><span class="plus" aria-hidden="true"></span></summary>
+        <div class="ans"><p>{{ a }}</p></div>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-dark" aria-labelledby="ty-others">
+  <div class="wrap">
+    <h2 id="ty-others" class="h2" data-split>{{ tui.others }}</h2>
+    <ul class="types types-dark" style="margin-top:40px">
+      {% for o in others %}
+      <li data-reveal style="--d:{{ 0.08 * loop.index0 }}s" data-spot><a class="type-link" href="{{ o.url }}"><span class="type-col" aria-hidden="true"></span><h3>{{ o.name }}</h3><p>{{ o.short }}</p><span class="link-arrow">{{ tui.explore }}{{ icons.arrow | safe }}</span></a></li>
+      {% endfor %}
+      <li data-reveal data-spot><a class="type-link" href="{{ u.formation }}"><span class="type-col" aria-hidden="true"></span><h3>{{ t.fp.crumb }}</h3><p>{{ t.fp.why_h }}</p><span class="link-arrow">{{ tui.explore }}{{ icons.arrow | safe }}</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec sec-ivory cta-band" aria-labelledby="cta-title">
+  <div class="wrap cta-in" data-reveal>
+    <img src="{{ root }}assets/img/mark-gold.webp" alt="" width="90" height="82" aria-hidden="true">
+    <h2 id="cta-title" class="h2">{{ t.fp.cta_h }}</h2>
+    <p class="lead">{{ t.fp.cta_p }}</p>
+    <div class="hero-actions center">
+      <a class="btn btn-dark" href="{{ u.home_anchor }}#contact"><span>{{ t.cta }}</span>{{ icons.arrow | safe }}</a>
+      <a class="btn btn-wa" href="https://wa.me/{{ c.WHATSAPP }}?text={{ (tui.start ~ ' ' ~ ty.name) | urlencode }}" target="_blank" rel="noopener">{{ icons.whatsapp | safe }}<span>{{ t.contact.wa_l }}</span></a>
+    </div>
+  </div>
+</section>
+{% endblock %}

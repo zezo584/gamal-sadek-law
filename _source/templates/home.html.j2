@@ -118,7 +118,7 @@
     <h3 class="h3" data-reveal>{{ t.formation.types_h }}</h3>
     <ul class="types">
       {% for h, p in t.formation.types %}
-      <li data-reveal style="--d:{{ 0.08 * loop.index0 }}s"><span class="type-col" aria-hidden="true"></span><h4>{{ h }}</h4><p>{{ p }}</p></li>
+      <li data-reveal style="--d:{{ 0.08 * loop.index0 }}s"><a class="type-link" href="{{ u.types[loop.index0] }}"><span class="type-col" aria-hidden="true"></span><h4>{{ h }}</h4><p>{{ p }}</p><span class="link-arrow">{{ tui.explore }}{{ icons.arrow | safe }}</span></a></li>
       {% endfor %}
     </ul>
     <h3 class="h3" data-reveal>{{ t.formation.steps_h }}</h3>
@@ -159,10 +159,7 @@
   <div class="wrap">
     <div class="yt" data-reveal>
       <div class="yt-player" data-yt>
-        <img src="{{ root }}assets/img/office-1784.webp" alt="{{ t.media.yt_h }}" width="1600" height="1067" loading="lazy">
-        <button type="button" class="yt-play" aria-label="{{ t.media.yt_play }}">
-          <span class="pulse">{{ icons.play | safe }}</span><b>{{ t.media.yt_play }}</b>
-        </button>
+        <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=UU{{ yt_cid }}&rel=0" title="{{ t.media.yt_h }}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </div>
       <div class="yt-copy">
         <span class="yt-logo">{{ icons.youtube | safe }} YouTube</span>
@@ -171,6 +168,7 @@
         <a class="btn btn-gold" href="{{ c.SOCIAL.youtube }}?sub_confirmation=1" target="_blank" rel="noopener"><span>{{ t.media.yt_btn }}</span></a>
       </div>
     </div>
+    <div class="vid-grid" data-featured hidden></div>
   </div>
 </section>
 
@@ -241,6 +239,26 @@
   </div>
 </section>
 
+<!-- ============ FAQ ============ -->
+<section class="sec sec-ivory2 home-faq" id="faq" aria-labelledby="faq-title">
+  <div class="wrap faq-wrap">
+    <div class="faq-side">
+      <p class="eyebrow" data-reveal><span class="rule"></span>{{ hfaq.eyebrow }}</p>
+      <h2 id="faq-title" class="h2" data-split>{{ hfaq.h2 }}</h2>
+      <p class="lead" data-reveal>{{ hfaq.lead }}</p>
+      <a class="btn btn-wa" data-reveal href="https://wa.me/{{ c.WHATSAPP }}" target="_blank" rel="noopener">{{ icons.whatsapp | safe }}<span>{{ hfaq.more }}</span></a>
+    </div>
+    <div class="faq faq-light">
+      {% for q, a in hfaq['items'] %}
+      <details data-reveal style="--d:{{ 0.04 * loop.index0 }}s" {{ 'open' if loop.first }}>
+        <summary><h3>{{ q }}</h3><span class="plus" aria-hidden="true"></span></summary>
+        <div class="ans"><p>{{ a }}</p></div>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
 <!-- ============ CONTACT ============ -->
 <section class="sec sec-ivory contact" id="contact" aria-labelledby="contact-title">
   <div class="wrap contact-grid">
@@ -306,7 +324,7 @@
       <h3>{{ t.contact.info_h }}</h3>
       <ul class="info">
         <li>{{ icons.pin | safe }}<div><small>{{ t.contact.address_l }}</small><span>{{ t.contact.address }}</span></div></li>
-        <li>{{ icons.phone | safe }}<div><small>{{ t.contact.phone_l }}</small><a href="tel:{{ c.PHONE_INTL }}" dir="ltr">{{ c.PHONE_LOCAL }}</a><span class="muted" dir="ltr">{{ c.PHONE_INTL }}</span></div>
+        <li>{{ icons.phone | safe }}<div><small>{{ t.contact.phone_l }}</small><a href="tel:{{ c.PHONE_INTL }}" dir="ltr">{{ c.PHONE_LOCAL }}</a><a href="tel:{{ c.PHONE2_INTL }}" dir="ltr" class="muted">{{ c.PHONE2_LOCAL }}</a></div>
           <button type="button" class="copy" data-copy="{{ c.PHONE_INTL }}">{{ t.contact.copy_btn }}</button></li>
         <li>{{ icons.whatsapp | safe }}<div><small>{{ t.contact.wa_l }}</small><a href="https://wa.me/{{ c.WHATSAPP }}" target="_blank" rel="noopener" dir="ltr">{{ c.PHONE_INTL }}</a></div></li>
         <li>{{ icons.mail | safe }}<div><small>{{ t.contact.email_l }}</small><a href="mailto:{{ c.EMAIL }}" class="break">{{ c.EMAIL }}</a></div>

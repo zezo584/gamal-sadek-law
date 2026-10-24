@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 """Bilingual content for the site. Arabic is primary; English mirrors it."""
 
-PHONE_LOCAL = "01117170122"
-PHONE_INTL = "+201117170122"
-WHATSAPP = "201117170122"
+PHONE_LOCAL = "01023973054"
+PHONE_INTL = "+201023973054"
+PHONE2_LOCAL = "01117170122"
+PHONE2_INTL = "+201117170122"
+WHATSAPP = "201023973054"
 EMAIL = "gamalabdelnaser464@gmail.com"
 SOCIAL = {
     "facebook": "https://www.facebook.com/YourAdvisor2021",
@@ -42,13 +44,13 @@ AR = {
     "skip": "تخطَّ إلى المحتوى",
     "nav": [("home", "الرئيسية"), ("about", "من نحن"), ("services", "خدماتنا"),
             ("clients", "عملاؤنا"), ("contact", "تواصل معنا")],
-    "nav_extra": [("academy", "الأكاديمية"), ("media", "الريلز والفيديو")],
+    "nav_extra": [("academy", "الأكاديمية"), ("media", "الريلز والفيديو"), ("faq", "الأسئلة الشائعة")],
     "nav_formation": "تأسيس الشركات",
     "cta": "اطلب استشارة الآن",
     "menu": "القائمة", "close": "إغلاق",
     "home": {
         "title": "مكتب المستشار جمال عبدالناصر صادق | تأسيس الشركات وصياغة العقود في مصر",
-        "desc": "مكتب المستشار جمال عبدالناصر صادق للمحاماة والاستشارات القانونية: تأسيس الشركات وتسجيلها، صياغة العقود ومراجعتها، القضايا المدنية والجنائية والأسرة وإقامة المستثمر. خبرة +7 سنوات وتأسيس +75 شركة.",
+        "desc": "مكتب المستشار جمال عبدالناصر صادق للمحاماة والاستشارات القانونية: تأسيس الشركات وتسجيلها، صياغة العقود ومراجعتها، القضايا المدنية والجنائية والأحوال الشخصية وإقامة المستثمر. خبرة +7 سنوات وتأسيس +75 شركة.",
         "keywords": "تأسيس الشركات, تأسيس شركة في مصر, محامي تأسيس شركات, صياغة العقود, مراجعة العقود, محامي قضايا مدنية, محامي أحوال شخصية, إقامة مستثمر في مصر, استشارة قانونية, جمال عبدالناصر صادق",
     },
     "hero": {
@@ -67,7 +69,7 @@ AR = {
     "about": {
         "eyebrow": "من نحن",
         "h2": "نبذة عن المستشار",
-        "lead": "المستشار جمال عبدالناصر صادق، محامٍ ومستشار قانوني بخبرة تزيد على سبع سنوات، متخصص في تأسيس الشركات وصياغة العقود، والقضايا المدنية والجنائية وقضايا الأسرة والأحوال الشخصية.",
+        "lead": "المستشار جمال عبدالناصر صادق، محامٍ ومستشار قانوني بخبرة تزيد على سبع سنوات، متخصص في تأسيس الشركات وصياغة العقود، والقضايا المدنية والجنائية وقضايا الأحوال الشخصية.",
         "p2": "حاصل على دبلومات متخصصة في تأسيس الشركات وصياغة العقود، وقد أسّس المكتب أكثر من 75 شركة في قطاعات متنوعة تشمل الاستثمار العقاري والمقاولات والمجوهرات والسبائك الذهبية ونقل العمال والتسويق الرقمي.",
         "p3": "ويقدّم محتوى قانونيًا عبر قناته «أ. جمال عبدالناصر صادق» على يوتيوب، لمساعدة الأفراد والشركات على فهم القانون والإجراءات القانونية بشرح مبسّط وواضح.",
         "dipl_h": "الدبلومات المتخصصة",
@@ -99,8 +101,8 @@ AR = {
              "تقديم الاستشارات القانونية والترافع في المنازعات المدنية.", []),
             ("criminal", "القضايا الجنائية",
              "تقديم الاستشارات القانونية والدفاع في القضايا الجنائية.", []),
-            ("family", "الأسرة والأحوال الشخصية",
-             "الاستشارات ومتابعة القضايا المتعلقة بالأسرة والأحوال الشخصية.", []),
+            ("family", "قضايا الأحوال الشخصية",
+             "الطلاق والخلع والنفقات والحضانة والرؤية وسائر منازعات الأسرة، استشارةً وتمثيلًا أمام محاكم الأسرة.", []),
             ("affairs", "الشؤون القانونية",
              "دعم قانوني مستمر للأفراد والشركات ومتابعة الإجراءات القانونية.", []),
             ("residency", "إقامة المستثمر",
@@ -228,6 +230,8 @@ AR = {
         "docs_note": "تختلف المتطلبات حسب شكل الشركة ونشاطها؛ نرسل لك القائمة الدقيقة لحالتك بعد الاستشارة الأولى.",
         "faq_h": "أسئلة شائعة عن تأسيس الشركات",
         "faq": [
+            ("كم تكلفة تأسيس الشركة؟",
+             "تتكوّن التكلفة من رسوم حكومية (التوثيق والقيد في السجل التجاري والنشر والتسجيل الضريبي وما يلزم بحسب النشاط) وأتعاب المكتب، وتختلف بحسب شكل الشركة ورأس مالها ونشاطها. نرسل لك عرضًا مكتوبًا بالتكلفة الإجمالية بعد الاستشارة الأولى."),
             ("كم تستغرق مدة تأسيس الشركة؟",
              "تختلف المدة بحسب شكل الشركة ونشاطها واكتمال المستندات وموافقات الجهات المختصة إن لزمت. نحدد لك جدولًا زمنيًا واضحًا في الاستشارة الأولى ونلتزم بمتابعته."),
             ("ما الفرق بين شركة الشخص الواحد والشركة ذات المسؤولية المحدودة؟",
@@ -257,7 +261,7 @@ EN = {
     "skip": "Skip to content",
     "nav": [("home", "Home"), ("about", "About"), ("services", "Services"),
             ("clients", "Clients"), ("contact", "Contact")],
-    "nav_extra": [("academy", "Academy"), ("media", "Reels & Videos")],
+    "nav_extra": [("academy", "Academy"), ("media", "Reels & Videos"), ("faq", "FAQ")],
     "nav_formation": "Company Formation",
     "cta": "Request a Consultation",
     "menu": "Menu", "close": "Close",
@@ -282,7 +286,7 @@ EN = {
     "about": {
         "eyebrow": "About",
         "h2": "About the Counselor",
-        "lead": "Counselor Gamal Abdel Nasser Sadek is a lawyer and legal advisor with more than seven years of experience, specializing in company formation and contract drafting, as well as civil, criminal, family and personal status cases.",
+        "lead": "Counselor Gamal Abdel Nasser Sadek is a lawyer and legal advisor with more than seven years of experience, specializing in company formation and contract drafting, as well as civil, criminal and personal status (family) cases.",
         "p2": "He holds specialized diplomas in company formation and contract drafting. The office has formed more than 75 companies across sectors including real estate investment, contracting, jewelry, gold bullion, workforce transport and digital marketing.",
         "p3": "He also publishes legal content on his YouTube channel, helping individuals and businesses understand the law and legal procedures through clear, simple explanations.",
         "dipl_h": "Specialized Diplomas",
@@ -314,8 +318,8 @@ EN = {
              "Legal consultation and representation in civil disputes.", []),
             ("criminal", "Criminal Cases",
              "Legal consultation and defense in criminal cases.", []),
-            ("family", "Family & Personal Status",
-             "Consultation and case handling for family and personal status matters.", []),
+            ("family", "Personal Status (Family) Cases",
+             "Divorce, khul', alimony, custody, visitation and other family disputes — consultation and representation before family courts.", []),
             ("affairs", "Legal Affairs",
              "Ongoing legal support for individuals and companies, and follow-up of legal procedures.", []),
             ("residency", "Investor Residency",
@@ -442,6 +446,8 @@ EN = {
         "docs_note": "Requirements vary by entity and activity; we send the exact list for your case after the first consultation.",
         "faq_h": "Company formation FAQ",
         "faq": [
+            ("How much does company formation cost?",
+             "The cost is made of government fees (notarization, Commercial Registry, publication, tax registration and activity-specific requirements) plus the office's fees, and varies by entity, capital and activity. We send a written quote for the total after the first consultation."),
             ("How long does company formation take?",
              "It depends on the entity, the activity, document readiness and any approvals required. We set a clear timeline in the first consultation and follow it."),
             ("What is the difference between a single-person company and an LLC?",
