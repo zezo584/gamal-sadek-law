@@ -43,15 +43,13 @@
     <div class="sec-head">
       <div>
         <p class="eyebrow" data-reveal><span class="rule"></span>{{ t.formation.eyebrow }}</p>
-        <h2 id="types-title" class="h2" data-split>{{ t.formation.types_h }}</h2>
+        <h2 id="types-title" class="h2" data-split>{{ ex.h }}</h2>
       </div>
       <p class="lead" data-reveal>{{ t.formation.lead }}</p>
     </div>
-    <ul class="types types-dark">
-      {% for h, p in t.formation.types %}
-      <li data-reveal style="--d:{{ 0.08 * loop.index0 }}s" data-spot><a class="type-link" href="{{ u.types[loop.index0] }}"><span class="type-col" aria-hidden="true"></span><h3>{{ h }}</h3><p>{{ p }}</p><span class="link-arrow">{{ tui.explore }}{{ icons.arrow | safe }}</span></a></li>
-      {% endfor %}
-    </ul>
+    <p class="ex-intro on-dark" data-reveal>{{ ex.p }}</p>
+    {% set dark = true %}{% set eid = 'f' %}
+    {% include 'explorer.html.j2' %}
     <h2 class="h3 on-dark" data-reveal>{{ t.formation.steps_h }}</h2>
     <ol class="steps steps-dark" data-steps>
       {% for h, p in t.formation.steps %}

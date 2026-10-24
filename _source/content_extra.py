@@ -189,3 +189,31 @@ TYPE_UI = {
            "explore": "Learn more", "choose_h": "Choose your company form", "choose_p": "A detailed page for each legal form: who it suits, its advantages and what to watch for.",
            "videos_h": "Video explainers", "start": "Start forming a"},
 }
+
+# Interactive company-type explorer (grouped: capital companies vs partnerships)
+EXPLORER = {
+    "ar": {
+        "h": "أنواع الشركات في مصر",
+        "p": "اختر نوع الشركة لتعرف باختصار عدد الشركاء وحدود المسؤولية وطريقة الإدارة ولمن يناسب.",
+        "groups": [("capital", "شركات الأموال", "تقوم على رأس المال، ومسؤولية الشريك فيها محدودة بقدر حصته أو أسهمه."),
+                   ("persons", "شركات الأشخاص", "تقوم على الثقة الشخصية بين الشركاء، ومسؤولية الشريك المتضامن غير محدودة.")],
+        "extra": {"slug": None, "group": "capital", "name": "شركة التوصية بالأسهم", "short": "شركاء متضامنون ومساهمون",
+                  "intro": "تجمع بين شركاء متضامنين يديرون الشركة ويُسألون مسؤولية غير محدودة، وشركاء مساهمين لا يُسألون إلا بقدر قيمة أسهمهم. رأس مالها مقسّم إلى أسهم قابلة للتداول.",
+                  "facts": [("الشركاء", "متضامن واحد على الأقل + مساهمون"), ("مسؤولية المتضامن", "غير محدودة"), ("مسؤولية المساهم", "بقدر قيمة أسهمه"), ("الإدارة", "الشركاء المتضامنون")],
+                  "suits": ["مؤسس يريد الاحتفاظ بالإدارة مع جذب ممولين", "مشروعات عائلية تتوسع بمستثمرين"]},
+        "groups_of": {"single-person-company": "capital", "limited-liability-company": "capital", "joint-stock-company": "capital", "partnerships": "persons"},
+        "start": "ابدأ التأسيس", "more": "التفاصيل الكاملة", "suits": "تناسب",
+    },
+    "en": {
+        "h": "Company types in Egypt",
+        "p": "Pick a company type to see, in brief, the number of partners, liability, management and who it suits.",
+        "groups": [("capital", "Capital companies", "Built on capital; a partner's liability is limited to their share or stock."),
+                   ("persons", "Partnerships", "Built on personal trust; general partners carry unlimited liability.")],
+        "extra": {"slug": None, "group": "capital", "name": "Partnership Limited by Shares", "short": "General partners plus shareholders",
+                  "intro": "Combines general partners, who manage the company with unlimited liability, and shareholders liable only up to the value of their shares. Its capital is divided into tradable shares.",
+                  "facts": [("Partners", "At least one general partner + shareholders"), ("General partner liability", "Unlimited"), ("Shareholder liability", "Up to share value"), ("Management", "The general partners")],
+                  "suits": ["A founder who wants to keep control while bringing in financiers", "Family businesses expanding with investors"]},
+        "groups_of": {"single-person-company": "capital", "limited-liability-company": "capital", "joint-stock-company": "capital", "partnerships": "persons"},
+        "start": "Start formation", "more": "Full details", "suits": "Suits",
+    },
+}

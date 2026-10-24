@@ -149,7 +149,7 @@ def build():
         tpl = env.get_template(("type" if ty else page) + ".html.j2")
         html = tpl.render(t=t, c=C, u=u, meta=meta, root="../" * path.count("/"), page=("type" if ty else page),
                           icons=ICONS, clients=C.CLIENTS[lang], domain=DOMAIN, map_q=MAP_Q,
-                          hfaq=X.HOME_FAQ[lang], tui=X.TYPE_UI[lang], ty=ty, others=others, yt_cid=YT_CID,
+                          hfaq=X.HOME_FAQ[lang], tui=X.TYPE_UI[lang], ex=X.EXPLORER[lang], types=X.TYPES[lang], ty=ty, others=others, yt_cid=YT_CID,
                           schema=schema_for(lang, page, t, ty),
                           i18n=json.dumps(i18n, ensure_ascii=False).replace("</", "<\\/"))
         html = re.sub(r"\n\s*\n+", "\n", html)

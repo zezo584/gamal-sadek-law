@@ -314,6 +314,29 @@
     setTimeout(function () { updateCenter(); }, 60);
   }
 
+  /* ---------- company-type explorer ---------- */
+  $$("[data-explorer]").forEach(function (ex) {
+    var tabs = $$('[role="tab"]', ex);
+    function select(tab, focus) {
+      tabs.forEach(function (t) {
+        var on = t === tab; t.setAttribute("aria-selected", on ? "true" : "false"); t.tabIndex = on ? 0 : -1;
+        var p = doc.getElementById(t.getAttribute("aria-controls")); if (p) p.hidden = !on;
+      });
+      if (focus) tab.focus();
+      if (window.innerWidth < 860) { var pn = doc.getElementById(tab.getAttribute("aria-controls")); if (pn && pn.getBoundingClientRect().top > window.innerHeight * 0.8) pn.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "nearest" }); }
+    }
+    tabs.forEach(function (t, i) {
+      t.tabIndex = t.getAttribute("aria-selected") === "true" ? 0 : -1;
+      t.addEventListener("click", function () { select(t); });
+      t.addEventListener("keydown", function (e) {
+        var k = e.key, n = null;
+        if (k === "ArrowDown" || k === "ArrowRight") n = tabs[(i + 1) % tabs.length];
+        if (k === "ArrowUp" || k === "ArrowLeft") n = tabs[(i - 1 + tabs.length) % tabs.length];
+        if (n) { e.preventDefault(); select(n, true); }
+      });
+    });
+  });
+
   /* ---------- featured videos (embedded directly) ---------- */
   var fg = $("[data-featured]");
   if (fg) {

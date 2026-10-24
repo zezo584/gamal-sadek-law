@@ -1,0 +1,35 @@
+{# Interactive company-type explorer. Needs: ex (EXPLORER[lang]), types (TYPES[lang]), u.types, dark (bool) #}
+{% set items = [] %}
+{% for ty in types %}{% set _ = items.append({'ty': ty, 'url': u.types[loop.index0], 'group': ex.groups_of[ty.slug]}) %}{% endfor %}
+{% set _ = items.insert(3, {'ty': ex.extra, 'url': u.formation, 'group': 'capital'}) %}
+<div class="explorer {{ 'explorer-dark' if dark }}" data-explorer>
+  <div class="ex-tabs" role="tablist" aria-label="{{ ex.h }}">
+    {% for gid, gname, gdesc in ex.groups %}
+    <div class="ex-group">
+      <p class="ex-group-h"><b>{{ gname }}</b><small>{{ gdesc }}</small></p>
+      {% for it in items if it.group == gid %}
+      <button type="button" role="tab" id="ex-tab-{{ eid }}-{{ gid }}-{{ loop.index }}" aria-controls="ex-panel-{{ eid }}-{{ gid }}-{{ loop.index }}" aria-selected="{{ 'true' if (gid == 'capital' and loop.first) else 'false' }}" class="ex-tab">
+        <span class="type-col" aria-hidden="true"></span><span><b>{{ it.ty.name }}</b><small>{{ it.ty.short }}</small></span>
+      </button>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+  <div class="ex-panels">
+    {% for gid, gname, gdesc in ex.groups %}
+    {% for it in items if it.group == gid %}
+    <article class="ex-panel" role="tabpanel" id="ex-panel-{{ eid }}-{{ gid }}-{{ loop.index }}" aria-labelledby="ex-tab-{{ eid }}-{{ gid }}-{{ loop.index }}" {{ '' if (gid == 'capital' and loop.first) else 'hidden' }}>
+      <span class="chip">{{ gname }}</span>
+      <h4>{{ it.ty.name }}</h4>
+      <p>{{ it.ty.intro }}</p>
+      <dl class="ex-facts">{% for k, v in it.ty.facts %}<div><dt>{{ k }}</dt><dd>{{ v }}</dd></div>{% endfor %}</dl>
+      <p class="ex-suits"><b>{{ ex.suits }}:</b> {{ it.ty.suits | join(' · ') }}</p>
+      <div class="ex-actions">
+        <a class="btn btn-gold btn-sm" href="https://wa.me/{{ c.WHATSAPP }}?text={{ (ex.start ~ ': ' ~ it.ty.name) | urlencode }}" target="_blank" rel="noopener">{{ icons.whatsapp | safe }}<span>{{ ex.start }}</span></a>
+        {% if it.ty.slug %}<a class="link-arrow" href="{{ it.url }}">{{ ex.more }}{{ icons.arrow | safe }}</a>{% endif %}
+      </div>
+    </article>
+    {% endfor %}
+    {% endfor %}
+  </div>
+</div>

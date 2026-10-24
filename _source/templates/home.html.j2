@@ -115,12 +115,10 @@
       </div>
       <p class="lead" data-reveal>{{ t.formation.lead }}</p>
     </div>
-    <h3 class="h3" data-reveal>{{ t.formation.types_h }}</h3>
-    <ul class="types">
-      {% for h, p in t.formation.types %}
-      <li data-reveal style="--d:{{ 0.08 * loop.index0 }}s"><a class="type-link" href="{{ u.types[loop.index0] }}"><span class="type-col" aria-hidden="true"></span><h4>{{ h }}</h4><p>{{ p }}</p><span class="link-arrow">{{ tui.explore }}{{ icons.arrow | safe }}</span></a></li>
-      {% endfor %}
-    </ul>
+    <h3 class="h3" data-reveal>{{ ex.h }}</h3>
+    <p class="ex-intro" data-reveal>{{ ex.p }}</p>
+    {% set dark = false %}{% set eid = 'h' %}
+    {% include 'explorer.html.j2' %}
     <h3 class="h3" data-reveal>{{ t.formation.steps_h }}</h3>
     <ol class="steps" data-steps>
       {% for h, p in t.formation.steps %}
