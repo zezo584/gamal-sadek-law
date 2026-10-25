@@ -690,3 +690,6 @@ html[dir="ltr"] .ex-tab:hover{transform:translateX(4px)}
   .ex-panels{position:static}
   .ex-facts{grid-template-columns:1fr}
 }
+.credit{color:#7d766a;letter-spacing:.02em;transition:color .3s}
+.credit b{color:var(--gold);font-weight:600}
+.credit:hover,.credit:hover b{color:var(--gold-hi)}
